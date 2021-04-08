@@ -1,23 +1,40 @@
-import logo from './logo.svg';
 import './App.css';
+import { useRef , useState } from 'react'
 
 function App() {
+  const en1 = useRef()
+  const en2 = useRef()
+  const [numero, setNumero] = useState(null)
+
+  function clicaSomar() {
+     ms(parseFloat(en1.current.value)+parseFloat(en2.current.value))
+    }
+
+    function clicaSubtrair() {
+        ms(parseFloat(en1.current.value)-parseFloat(en2.current.value))
+    }
+    function clicaMultiplicar() {
+       ms(parseFloat(en1.current.value)*parseFloat(en2.current.value))
+    }
+    function clicaDividir() {
+        ms(parseFloat(en1.current.value)/parseFloat(en2.current.value))
+    }
+
+    function ms(valor){
+      setNumero(valor)
+    }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className="App">
+      <input type="numb" ClassName="input-group-prepend" ref={en1}  ></input> 
+      <button className="btn btn-primary" onClick={clicaSomar}>+</button>
+      <button className="btn btn-secondary" onClick={clicaSubtrair}>-</button>
+      <button className="btn btn-success" onClick={clicaMultiplicar}>*</button>
+      <button className="btn btn-danger" onClick={clicaDividir}>/</button>
+      <input type="numb" ClassName="input-group-prepend" ref={en2}  ></input> 
+       </div>
+      {numero!==null&&(<div className="alert alert-primary"><p>={numero.toFixed(2)}</p></div>)}  
     </div>
   );
 }
